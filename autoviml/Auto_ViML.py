@@ -141,10 +141,10 @@ def modify_array_to_integer(y_pred, negative_flag=False):
         y_pred[y_pred<0] = 0
     return y_pred
 ##########################################################################
-def analyze_problem_type(train, target, verbose=0) :
+def analyze_problem_type(train, target, cat_limit=30, float_limit=15 verbose=0) :
     target = copy.deepcopy(target)
-    cat_limit = 30 ### this determines the number of categories to name integers as classification ##
-    float_limit = 15 ### this limits the number of float variable categories for it to become cat var
+    # cat_limit = 30 ### this determines the number of categories to name integers as classification ##
+    # float_limit = 15 ### this limits the number of float variable categories for it to become cat var
     if isinstance(target, str):
         target = [target]
     if len(target) == 1:
@@ -385,7 +385,7 @@ from pandas.api.types import is_datetime64_any_dtype as is_datetime
 #############################################################################################################
 def Auto_ViML(train, target, test='',sample_submission='',hyper_param='RS', feature_reduction=True,
             scoring_parameter='logloss', Boosting_Flag=None, KMeans_Featurizer=False,
-            Add_Poly=0, Stacking_Flag=False, Binning_Flag=False,
+            Add_Poly=0, Stacking_Flag=False, Binning_Flag=False, cat_limit=30, float_limit=15,
               Imbalanced_Flag=False, GPU_flag=False, verbose=0):
     """
     #########################################################################################################
@@ -689,7 +689,7 @@ def Auto_ViML(train, target, test='',sample_submission='',hyper_param='RS', feat
     print('%s Target: %s' %(model_label,target))
     ###### Now analyze what problem we have here ####
     try:
-        modeltype = analyze_problem_type(train, target,verbose)
+        modeltype = analyze_problem_type(train=train, target=target, cat_limit=cat_limit, float_limit=float_limit, verbose=verbose)
     except:
         print('Cannot find the Target variable in data set. Please check input and try again')
         return
