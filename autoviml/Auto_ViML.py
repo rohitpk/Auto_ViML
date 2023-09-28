@@ -141,7 +141,7 @@ def modify_array_to_integer(y_pred, negative_flag=False):
         y_pred[y_pred<0] = 0
     return y_pred
 ##########################################################################
-def analyze_problem_type(train, target, cat_limit=30, float_limit=15 verbose=0) :
+def analyze_problem_type(train, target, cat_limit=30, float_limit=15, verbose=0) :
     target = copy.deepcopy(target)
     # cat_limit = 30 ### this determines the number of categories to name integers as classification ##
     # float_limit = 15 ### this limits the number of float variable categories for it to become cat var
